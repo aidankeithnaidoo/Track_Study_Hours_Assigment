@@ -17,6 +17,8 @@ namespace ST10109482_Prog2B.Setup
 
         private List<Module> moduleList = new List<Module>();
 
+        private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
+
         public Module(string moduleCode, string moduleName, int credits, double classHours, int semsterWeeks, string startDate)
         {
             this.ModuleCode = moduleCode;
