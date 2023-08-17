@@ -160,9 +160,9 @@
                              Text="" 
                              VerticalAlignment="Top"
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                            />
 
-                    <TextBox x:Name="textBox1" 
+                    <TextBox x:Name="moduleName" 
                              Grid.Column="1" 
                              HorizontalAlignment="Left"
                              Margin="10,0,0,0"
@@ -171,9 +171,9 @@
                              Text=""
                              VerticalAlignment="Center" 
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                            />
 
-                    <TextBox x:Name="textBox2" 
+                    <TextBox x:Name="credits" 
                              Grid.Column="1" 
                              HorizontalAlignment="Left" 
                              Margin="10,31,0,0" 
@@ -182,9 +182,9 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                           />
 
-                    <TextBox x:Name="textBox3" 
+                    <TextBox x:Name="classHour" 
                              Grid.Column="1" 
                              HorizontalAlignment="Left" 
                              Margin="10,0,0,0" 
@@ -193,9 +193,9 @@
                              Text="" 
                              VerticalAlignment="Center" 
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                            />
 
-                    <TextBox x:Name="textBox4"
+                    <TextBox x:Name="semesterWeek"
                              Grid.Column="1" 
                              HorizontalAlignment="Left" 
                              Margin="10,27,0,0" 
@@ -204,9 +204,9 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                            />
 
-                    <TextBox x:Name="textBox5" 
+                    <TextBox x:Name="startDate" 
                              Grid.Column="1" 
                              HorizontalAlignment="Left" 
                              Margin="10,5,0,0" 
@@ -215,7 +215,7 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
-                             Style="{StaticResource modernText}"/>
+                            />
 
                     <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="10,55,10,-15">
 

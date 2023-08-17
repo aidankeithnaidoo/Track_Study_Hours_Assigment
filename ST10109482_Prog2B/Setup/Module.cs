@@ -10,16 +10,16 @@ namespace ST10109482_Prog2B.Setup
     {
         private string moduleCode;
         private string moduleName;
-        private int credits;
+        private string credits;
         private double classHours;
-        private int semsterWeeks;
+        private string semsterWeeks;
         private string startDate;
 
-        private List<Module> moduleList = new List<Module>();
+      
 
-        private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
+       
 
-        public Module(string moduleCode, string moduleName, int credits, double classHours, int semsterWeeks, string startDate)
+        public Module(string moduleCode, string moduleName, string credits, double classHours, string semsterWeeks, string startDate)
         {
             this.ModuleCode = moduleCode;
             this.ModuleName = moduleName;
@@ -31,9 +31,9 @@ namespace ST10109482_Prog2B.Setup
 
         public string ModuleCode { get => moduleCode; set => moduleCode = value; }
         public string ModuleName { get => moduleName; set => moduleName = value; }
-        public int Credits { get => credits; set => credits = value; }
+        public string Credits { get => credits; set => credits = value; }
         public double ClassHours { get => classHours; set => classHours = value; }
-        public int SemsterWeeks { get => semsterWeeks; set => semsterWeeks = value; }
+        public string SemsterWeeks { get => semsterWeeks; set => semsterWeeks = value; }
         public string StartDate { get => startDate; set => startDate = value; }
     }
 }
