@@ -160,6 +160,7 @@
                              Text="" 
                              VerticalAlignment="Top"
                              Width="208"
+                             Style="{StaticResource modernText}"
                             />
 
                     <TextBox x:Name="moduleName" 
@@ -171,6 +172,7 @@
                              Text=""
                              VerticalAlignment="Center" 
                              Width="208"
+                             Style="{StaticResource modernText}"
                             />
 
                     <TextBox x:Name="credits" 
@@ -182,7 +184,8 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
-                           />
+                             Style="{StaticResource modernText}"
+/>
 
                     <TextBox x:Name="classHour" 
                              Grid.Column="1" 
@@ -193,6 +196,7 @@
                              Text="" 
                              VerticalAlignment="Center" 
                              Width="208"
+                             Style="{StaticResource modernText}"
                             />
 
                     <TextBox x:Name="semesterWeek"
@@ -204,6 +208,7 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
+                             Style="{StaticResource modernText}"
                             />
 
                     <TextBox x:Name="startDate" 
@@ -215,6 +220,7 @@
                              Text="" 
                              VerticalAlignment="Top" 
                              Width="208"
+                             Style="{StaticResource modernText}"
                             />
 
                     <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="10,55,10,-15">

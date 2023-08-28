@@ -59,6 +59,9 @@
     <Compile Include="Windows\captureWindow.xaml.cs">
       <DependentUpon>captureWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\display.xaml.cs">
+      <DependentUpon>display.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\captureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\display.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

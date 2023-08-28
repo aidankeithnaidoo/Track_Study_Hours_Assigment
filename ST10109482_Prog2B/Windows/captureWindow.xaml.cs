@@ -20,6 +20,7 @@ namespace ST10109482_Prog2B.Windows
     /// </summary>
     public partial class captureWindow : Window
     {
+        
         public List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
         
@@ -45,8 +46,7 @@ namespace ST10109482_Prog2B.Windows
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {            
             ModuleInfo.Add(1, moduleList);
             MessageBox.Show("List of modules created");
         }
@@ -65,16 +65,20 @@ namespace ST10109482_Prog2B.Windows
 
         public void populateUser()
         {
+            Module md = new Module();
             string code = moduleCode.Text.ToUpper();
             string courseName = moduleName.Text;
-            string courseCredit = credits.Text;
+            int courseCredit = Convert.ToInt32(credits.Text);
             double hoursPerWeek = Convert.ToDouble(classHour.Text);
-            string numWeeks = semesterWeek.Text;
+            int numWeeks = Convert.ToInt32(semesterWeek.Text);
             string startingDate = startDate.Text;
+            double StudyHours = (courseCredit * 10 / numWeeks) - hoursPerWeek;
 
-            moduleList.Add(new Module(code, courseName, courseCredit, hoursPerWeek, numWeeks, startingDate) 
-            {ModuleCode = code, ModuleName = courseName, Credits = courseCredit, ClassHours = hoursPerWeek, SemsterWeeks = numWeeks, StartDate = startingDate}
+            moduleList.Add(new Module(code, courseName, courseCredit, hoursPerWeek, numWeeks, startingDate, StudyHours) 
+            {ModuleCode = code, ModuleName = courseName, Credits = courseCredit, ClassHours = hoursPerWeek, SemsterWeeks = numWeeks, StartDate = startingDate, StudyHours = StudyHours}
             );
+
+           
         }
     }
 }

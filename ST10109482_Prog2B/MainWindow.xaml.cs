@@ -47,23 +47,13 @@ namespace ST10109482_Prog2B
             cw.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        
+
+        private void display_click(object sender, RoutedEventArgs e)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (var kvp in ModuleInfo)
-            {
-                foreach (var module in kvp.Value)
-                {
-                    stringBuilder.AppendLine($"Credits: {kvp.Key}");
-                    stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
-                    stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
-                    // Append other module properties...
-                    stringBuilder.AppendLine(); // Add an empty line between modules
-                }
-            }
-
-            testDisplay.Text = stringBuilder.ToString();
+            display ds = new display(ModuleInfo);
+            this.Close();
+            ds.Show();
         }
     }
 }
