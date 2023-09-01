@@ -1,15 +1,17 @@
-﻿<Window x:Class="ST10109482_Prog2B.Windows.captureWindow"
+﻿<Window x:Class="ST10109482_Prog2B.Windows.updateStudyTime"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ST10109482_Prog2B.Windows"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000"        
+        Title="updateStudyTime" Height="450" Width="800"
         WindowStyle= "None"
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
+
+
     <Border Background="#272537"
             CornerRadius="20">
         <Grid>
@@ -24,19 +26,20 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Study Planner"
-                   VerticalAlignment="Top"
-                       HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="22"
-                       Margin="0,20,0,0" Width="152" Height="55"/>
+                       Margin="20,0,0,0"/>
 
             <Button HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Width="30"
                     Height="30"
-                    Margin="760,10,0,0"                    
+                    Margin="555,12,0,0"                    
                     Click="close_Click"
-                    Style="{StaticResource closeBtn}" Grid.Column="1"
+                    Grid.Column="1"
+                    
                     >
 
                 <Button.Template>
@@ -52,16 +55,16 @@
                              Height="50"
                              Foreground="White" 
                              FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="Button_Click"/>
+                             Style="{StaticResource buttonTheme}" Click="home_Click"/>
 
                 <Button Content="Add Course"
                              Height="50"
                              Foreground="White" 
                              FontSize="20"
-                             Style="{StaticResource buttonTheme}"                            
+                             Style="{StaticResource buttonTheme}" Click="addCourseSwitch_click"                            
                              />
 
-                <Button Content="Add Study Hours"
+                <Button Content="Display"
                              Height="50"
                              Foreground="White" 
                              FontSize="20"
@@ -69,8 +72,6 @@
 
 
             </StackPanel>
-
-
 
             <ContentControl Grid.Row="1"
                             Grid.Column="1"
@@ -87,9 +88,7 @@
                         <RowDefinition Height="90" />
                         <RowDefinition Height="90" />
                         <RowDefinition Height="90" />
-                        <RowDefinition Height="90" />
-                        <RowDefinition Height="90" />
-                        <RowDefinition Height="90" />
+
                     </Grid.RowDefinitions>
 
 
@@ -103,7 +102,7 @@
                            FontFamily="/Fonts/#Poppins"/>
 
                     <Label x:Name="label1" 
-                           Content="Module Name:" 
+                           Content="Hours Studied:" 
                            HorizontalAlignment="Left" 
                            Margin="20,0,0,0" 
                            Grid.Row="1" 
@@ -113,39 +112,10 @@
                            FontFamily="/Fonts/#Poppins"/>
 
                     <Label x:Name="label2" 
-                           Content="Number Of Credits:" 
+                           Content="Date of studying:" 
                            HorizontalAlignment="Left" 
                            Margin="20,24,0,0"
                            Grid.Row="2" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins"/>
-
-                    <Label x:Name="label3" 
-                           Content="Class Hours Per Week:"
-                           HorizontalAlignment="Left" 
-                           Margin="20,24,0,0" 
-                           Grid.Row="3" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins" Width="174"/>
-
-                    <Label x:Name="label4" 
-                           Content="Number of Semester Weeks:" 
-                           HorizontalAlignment="Center" 
-                           Grid.Row="4" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins" Margin="0,20,0,0"/>
-
-                    <Label x:Name="label5" 
-                           Content="Start Date:" 
-                           HorizontalAlignment="Left" 
-                           Margin="19,0,0,0" 
-                           Grid.Row="5" 
                            VerticalAlignment="Top"
                            Foreground="White"
                            FontSize="15"
@@ -159,11 +129,11 @@
                              TextWrapping="Wrap" 
                              Text="" 
                              VerticalAlignment="Top"
-                             Width="208"
-                             Style="{StaticResource modernText}"
+                             Width="230"
+                             Style="{StaticResource modernText}" Grid.ColumnSpan="2"
                             />
 
-                    <TextBox x:Name="moduleName" 
+                    <TextBox x:Name="hourStudyTxt" 
                              Grid.Column="1" 
                              HorizontalAlignment="Left"
                              Margin="10,0,0,0"
@@ -171,64 +141,18 @@
                              TextWrapping="Wrap"
                              Text=""
                              VerticalAlignment="Center" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
+                             Width="230"
+                             Style="{StaticResource modernText}" Grid.ColumnSpan="2"
                             />
 
-                    <TextBox x:Name="credits" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,31,0,0" 
-                             Grid.Row="2" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-/>
 
-                    <TextBox x:Name="classHour" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,0,0,0" 
-                             Grid.Row="3" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Center" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
 
-                    <TextBox x:Name="semesterWeek"
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,27,0,0" 
-                             Grid.Row="4" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
-
-                    <TextBox x:Name="startDate" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,5,0,0" 
-                             Grid.Row="5" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
-
-                    <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="10,55,10,-15">
+                    <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10,94,10,-54">
 
                         <Button x:Name="addBtn"                              
                                 Content="Add"
                                 Width="70"
-                                Height="25"
+                                Height="26"
                                 Style="{StaticResource ResourceKey=functionBtn}"
                                 Foreground="Black"
                                 Background="#B0C4DE" Click="addBtn_Click"/>
@@ -242,24 +166,12 @@
                                 Foreground="Black"
                                 Background="#B0C4DE" Click="SubmitBtn_Click"/>
 
-                        <Button x:Name="ClearBtn" 
-                                Content="Clear"
-                                Margin="0,10"
-                                Width="70"
-                                Height="25"
-                                Style="{StaticResource functionBtn}"
-                                Foreground="Black"
-                                Background="#B0C4DE" Click="ClearBtn_Click"/>
+
 
                     </StackPanel>
-
+                    <DatePicker x:Name="datePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" VerticalAlignment="Center" Grid.ColumnSpan="2" Width="230" Height="70"/>
                 </Grid>
-
-
             </ContentControl>
-
-
-
 
         </Grid>
     </Border>

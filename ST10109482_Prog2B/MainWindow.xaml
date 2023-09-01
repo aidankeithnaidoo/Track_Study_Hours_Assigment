@@ -70,6 +70,13 @@
                              Style="{StaticResource buttonTheme}" Click="display_click"/>
 
 
+                <Button Content="Add Study Hours"
+                             Height="50"
+                             Foreground="White" 
+                             FontSize="20"
+                             Style="{StaticResource buttonTheme}" Click="addHours_click"/>
+
+
             </StackPanel>
 
 

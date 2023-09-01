@@ -20,6 +20,7 @@ namespace ST10109482_Prog2B.Windows
     /// </summary>
     public partial class display : Window
     {
+        List<RecordData> records = new List<RecordData>();
         public List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
 
@@ -28,21 +29,24 @@ namespace ST10109482_Prog2B.Windows
             InitializeComponent();
         }
 
-        public display(Dictionary<int, List<Module>> ModuleInfo)
+        public display(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records)
         {
             InitializeComponent();
             this.ModuleInfo = ModuleInfo;
+            this.records = records; 
         }
 
         private void displayBtn_Click(object sender, RoutedEventArgs e)
         {
+
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (var kvp in ModuleInfo)
             {
                 foreach (var module in kvp.Value)
                 {
-                    stringBuilder.AppendLine($"Credits: {kvp.Key}");
+                    stringBuilder.AppendLine($"Module ID: {kvp.Key}" );
+                    stringBuilder.AppendLine($"Credits: {module.Credits}");
                     stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
                     stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
                     stringBuilder.AppendLine($"Self Study Hours: {module.StudyHours}");
@@ -52,11 +56,25 @@ namespace ST10109482_Prog2B.Windows
             }
 
             displayTxt.Text = stringBuilder.ToString();
+
+            //StringBuilder stringBuilder = new StringBuilder();
+
+            //foreach (var module in records)
+            //{
+            //    stringBuilder.AppendLine($"Module Code: {module.MCode}");
+            //    stringBuilder.AppendLine($"Hour Studied: {module.HoursRecorded}");
+            //    stringBuilder.AppendLine($"Date captured: {module.StudyDate}");
+            //    // Append other module properties...
+            //    stringBuilder.AppendLine(); // Add an empty line between modules
+            //}
+
+            //displayTxt.Text = stringBuilder.ToString();
+
         }
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {
-            captureWindow cw = new captureWindow(ModuleInfo);
+            captureWindow cw = new captureWindow(ModuleInfo, records);
             this.Close();
             cw.Show();
         }
@@ -64,7 +82,7 @@ namespace ST10109482_Prog2B.Windows
 
         private void home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(ModuleInfo);
+            MainWindow mw = new MainWindow(ModuleInfo, records);
             this.Close();
             mw.Show();
         }

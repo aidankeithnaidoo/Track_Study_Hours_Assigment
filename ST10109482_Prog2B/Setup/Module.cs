@@ -15,6 +15,7 @@ namespace ST10109482_Prog2B.Setup
         private int semsterWeeks;
         private string startDate;
         private double studyHours;
+        
 
 
 
@@ -29,6 +30,7 @@ namespace ST10109482_Prog2B.Setup
             this.SemsterWeeks = semsterWeeks;
             this.StartDate = startDate;
             this.StudyHours = studyHours;
+            
         }
 
         public Module()
@@ -43,7 +45,6 @@ namespace ST10109482_Prog2B.Setup
         public int SemsterWeeks { get => semsterWeeks; set => semsterWeeks = value; }
         public string StartDate { get => startDate; set => startDate = value; }
         public double StudyHours { get => studyHours; set => studyHours = value; }
-
-       
+    
     }
 }

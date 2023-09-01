@@ -55,12 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Setup\RecordData.cs" />
     <Compile Include="Setup\Module.cs" />
     <Compile Include="Windows\captureWindow.xaml.cs">
       <DependentUpon>captureWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\display.xaml.cs">
       <DependentUpon>display.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\updateStudyTime.xaml.cs">
+      <DependentUpon>updateStudyTime.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\display.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\updateStudyTime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
