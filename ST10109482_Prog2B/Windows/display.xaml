@@ -95,7 +95,7 @@
                     VerticalAlignment="Top" 
                     Height="309" 
                     Width="599">
-                
+
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <TextBox Text="" 
                              x:Name="displayTxt"
@@ -108,7 +108,26 @@
                              IsReadOnly="True" />
                 </ScrollViewer>
             </Border>
-            <Button x:Name="displayBtn" Grid.Column="1" Content="Display" HorizontalAlignment="Left" Margin="39,458,0,0" Grid.Row="1" VerticalAlignment="Top" Click="displayBtn_Click"/>
+           
+            <Button x:Name="displayBtn" Grid.Column="1" 
+                    Content="Display" 
+                    HorizontalAlignment="Left" 
+                    Margin="39,458,0,0" 
+                    Grid.Row="1" 
+                    VerticalAlignment="Top" 
+                    Click="displayBtn_Click"/>
+            
+            <TextBox x:Name="searchTxt" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Margin="150,23,0,0" 
+                     Grid.Row="1"
+                     TextWrapping="Wrap" 
+                     Text="" 
+                     VerticalAlignment="Top" 
+                     Width="250"
+                     Height="47"
+                     Style="{StaticResource modernText}"/>
 
 
 

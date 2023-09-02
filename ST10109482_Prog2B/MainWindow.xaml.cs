@@ -25,12 +25,14 @@ namespace ST10109482_Prog2B
         public List<Module> moduleList = new List<Module>();
         List<RecordData> records = new List<RecordData>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
+        private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public MainWindow(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records)
+        public MainWindow(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records,Dictionary<int, List<RecordData>> recordInfo)
         {
             InitializeComponent();
             this.ModuleInfo = ModuleInfo;
@@ -44,7 +46,7 @@ namespace ST10109482_Prog2B
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {
-            captureWindow cw = new captureWindow(ModuleInfo, records);
+            captureWindow cw = new captureWindow(ModuleInfo, records, recordInfo);
             this.Close();
             cw.Show();
         }
@@ -53,14 +55,14 @@ namespace ST10109482_Prog2B
 
         private void display_click(object sender, RoutedEventArgs e)
         {
-            display ds = new display(ModuleInfo,records);
+            display ds = new display(ModuleInfo,records, recordInfo);
             this.Close();
             ds.Show();
         }
 
         private void addHours_click(object sender, RoutedEventArgs e)
         {
-            updateStudyTime updateStudyTime = new updateStudyTime(ModuleInfo,records);
+            updateStudyTime updateStudyTime = new updateStudyTime(ModuleInfo,records, recordInfo);
             this.Close();
             updateStudyTime.Show();
         }

@@ -23,17 +23,20 @@ namespace ST10109482_Prog2B.Windows
         List<RecordData> records = new List<RecordData>();
         public List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
-        
+        private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
+
+
         public captureWindow()
         {
             InitializeComponent();
         }
 
-        public captureWindow(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records)
+        public captureWindow(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records, Dictionary<int, List<RecordData>> recordInfo)
         {
             InitializeComponent();
             this.ModuleInfo = ModuleInfo;
-            this.records = records; 
+            this.records = records;
+            this.recordInfo = recordInfo;   
         }
         private void close_Click(object sender, RoutedEventArgs e)
         {
@@ -50,9 +53,10 @@ namespace ST10109482_Prog2B.Windows
             int numWeeks = Convert.ToInt32(semesterWeek.Text);
             string startingDate = startDate.Text;
             double StudyHours = (courseCredit * 10 / numWeeks) - hoursPerWeek;
+            double recordedHours = 0;
 
 
-            moduleList.Add(new Module(code, courseName, courseCredit, hoursPerWeek, numWeeks, startingDate, StudyHours)
+            moduleList.Add(new Module(code, courseName, courseCredit, hoursPerWeek, numWeeks, startingDate, StudyHours, recordedHours)
             {
                 ModuleCode = code,
                 ModuleName = courseName,
@@ -61,6 +65,7 @@ namespace ST10109482_Prog2B.Windows
                 SemsterWeeks = numWeeks,
                 StartDate = startingDate,
                 StudyHours = StudyHours,
+                RecordedHours = recordedHours
             }
             );
 
@@ -93,14 +98,14 @@ namespace ST10109482_Prog2B.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(ModuleInfo, records);
+            MainWindow mw = new MainWindow(ModuleInfo, records, recordInfo);
             mw.Show();
             this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            updateStudyTime udt = new updateStudyTime(ModuleInfo, records);
+            updateStudyTime udt = new updateStudyTime(ModuleInfo, records, recordInfo);
             this.Close();
             udt.Show();
         }

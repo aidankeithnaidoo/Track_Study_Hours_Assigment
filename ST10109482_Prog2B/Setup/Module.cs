@@ -15,13 +15,14 @@ namespace ST10109482_Prog2B.Setup
         private int semsterWeeks;
         private string startDate;
         private double studyHours;
-        
+        private double recordedHours;
+
 
 
 
         //NOTE THINK OF TEMP VARS FOR STUDY TIME 
 
-        public Module(string moduleCode, string moduleName, int credits, double classHours, int semsterWeeks, string startDate, double studyHours)
+        public Module(string moduleCode, string moduleName, int credits, double classHours, int semsterWeeks, string startDate, double studyHours, double recordedHours)
         {
             this.ModuleCode = moduleCode;
             this.ModuleName = moduleName;
@@ -30,7 +31,7 @@ namespace ST10109482_Prog2B.Setup
             this.SemsterWeeks = semsterWeeks;
             this.StartDate = startDate;
             this.StudyHours = studyHours;
-            
+            this.RecordedHours = recordedHours;
         }
 
         public Module()
@@ -45,6 +46,6 @@ namespace ST10109482_Prog2B.Setup
         public int SemsterWeeks { get => semsterWeeks; set => semsterWeeks = value; }
         public string StartDate { get => startDate; set => startDate = value; }
         public double StudyHours { get => studyHours; set => studyHours = value; }
-    
+        public double RecordedHours { get => recordedHours; set => recordedHours = value; }
     }
 }
