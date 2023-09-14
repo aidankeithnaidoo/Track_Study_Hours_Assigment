@@ -45,7 +45,7 @@ namespace ST10109482_Prog2B.Windows
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            Module md = new Module();
+            //Module md = new Module();
             string code = moduleCode.Text.ToUpper();
             string courseName = moduleName.Text;
             int courseCredit = Convert.ToInt32(credits.Text);
@@ -93,7 +93,12 @@ namespace ST10109482_Prog2B.Windows
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            moduleCode.Text = string.Empty;
+            moduleName.Text = string.Empty;
+            credits.Text = string.Empty;
+            classHour.Text = string.Empty;
+            semesterWeek.Text = string.Empty;
+            startDate.Text = string.Empty;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -108,6 +113,22 @@ namespace ST10109482_Prog2B.Windows
             updateStudyTime udt = new updateStudyTime(ModuleInfo, records, recordInfo);
             this.Close();
             udt.Show();
+        }
+
+        public double getSelfHours()
+        {
+            var selfHours = from h in moduleList
+                            where h.StudyHours > 0
+                            select h.StudyHours;
+
+            return Convert.ToDouble(selfHours);
+        }
+
+        private void displayBtn_Click(object sender, RoutedEventArgs e)
+        {
+            display ds = new display(ModuleInfo,records,recordInfo);
+            this.Close();
+            ds.Show();
         }
     }
 }

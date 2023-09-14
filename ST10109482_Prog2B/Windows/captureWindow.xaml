@@ -1,80 +1,108 @@
-﻿<Window x:Class="ST10109482_Prog2B.Windows.captureWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ST10109482_Prog2B.Windows"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000"        
-        WindowStyle= "None"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True">
-    <Border Background="#272537"
-            CornerRadius="20">
+﻿<Window
+    x:Class="ST10109482_Prog2B.Windows.captureWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ST10109482_Prog2B.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1000"
+    Height="650"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border Background="#272537" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions >
-                <RowDefinition Height="75"/>
-                <RowDefinition/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Study Planner"
-                   VerticalAlignment="Top"
-                       HorizontalAlignment="Center"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="0,20,0,0" Width="152" Height="55"/>
-
-            <Button HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Width="30"
-                    Height="30"
-                    Margin="760,10,0,0"                    
-                    Click="close_Click"
-                    Style="{StaticResource closeBtn}" Grid.Column="1"
-                    >
+            <Button
+                Grid.Column="1"
+                Width="30"
+                Height="30"
+                Margin="760,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="close_Click"
+                Style="{StaticResource closeBtn}">
 
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Image Source="\Images\icons8-close-window-96.png" Width="25" Height="25"/>
+                        <Image
+                            Width="25"
+                            Height="25"
+                            Source="\Images\icons8-close-window-96.png" />
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
-            <StackPanel Grid.Row="1" Background="#1F1E2A">
+            <StackPanel Grid.RowSpan="2">
 
-                <Button Content="Home"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="Button_Click"/>
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                        <GradientStop Offset="0.0" Color="#5BC3FF" />
+                        <GradientStop Offset="1" Color="#1e5abf" />
+                    </LinearGradientBrush>
+                </StackPanel.Background>
 
-                <Button Content="Add Course"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}"                            
-                             />
+                <TextBlock
+                    Margin="20,20,10,50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="22"
+                    Foreground="White"
+                    Text="Study Planner" />
 
-                <Button Content="Add Study Hours"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="Button_Click_1"/>
+                <Button
+                    Height="50"
+                    Click="Button_Click"
+                    Content="Home"
+                    FontSize="20"
+                    Foreground="White"
+                    Style="{StaticResource buttonTheme}" />
+
+                <Button
+                    Height="50"
+                    Click="displayBtn_Click"
+                    Content="Display"
+                    FontSize="20"
+                    Foreground="White"
+                    Style="{StaticResource buttonTheme}" />
+
+
+                <Button
+                    Height="50"
+                    Content="Add Course"
+                    FontSize="20"
+                    Foreground="White"
+                    Style="{StaticResource buttonTheme}" />
+
+                <Button
+                    Height="50"
+                    Click="Button_Click_1"
+                    Content="Add Study Hours"
+                    FontSize="20"
+                    Foreground="White"
+                    Style="{StaticResource buttonTheme}" />
 
 
             </StackPanel>
 
 
 
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10">
+            <ContentControl
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10">
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -93,172 +121,200 @@
                     </Grid.RowDefinitions>
 
 
-                    <Label x:Name="label" Content="Module Code:" 
-                           HorizontalAlignment="Left" 
-                           Margin="20,32,0,0" 
-                           VerticalAlignment="Top" 
-                           Width="113" Height="34"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins"/>
+                    <Label
+                        x:Name="label"
+                        Width="113"
+                        Height="34"
+                        Margin="20,32,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Module Code:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
-                    <Label x:Name="label1" 
-                           Content="Module Name:" 
-                           HorizontalAlignment="Left" 
-                           Margin="20,0,0,0" 
-                           Grid.Row="1" 
-                           VerticalAlignment="Center"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins"/>
+                    <Label
+                        x:Name="label1"
+                        Grid.Row="1"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Module Name:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
-                    <Label x:Name="label2" 
-                           Content="Number Of Credits:" 
-                           HorizontalAlignment="Left" 
-                           Margin="20,24,0,0"
-                           Grid.Row="2" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins"/>
+                    <Label
+                        x:Name="label2"
+                        Grid.Row="2"
+                        Margin="20,24,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Number Of Credits:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
-                    <Label x:Name="label3" 
-                           Content="Class Hours Per Week:"
-                           HorizontalAlignment="Left" 
-                           Margin="20,24,0,0" 
-                           Grid.Row="3" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins" Width="174"/>
+                    <Label
+                        x:Name="label3"
+                        Grid.Row="3"
+                        Width="174"
+                        Margin="20,24,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Class Hours Per Week:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
-                    <Label x:Name="label4" 
-                           Content="Number of Semester Weeks:" 
-                           HorizontalAlignment="Center" 
-                           Grid.Row="4" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins" Margin="0,20,0,0"/>
+                    <Label
+                        x:Name="label4"
+                        Grid.Row="4"
+                        Margin="0,20,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Content="Number of Semester Weeks:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
-                    <Label x:Name="label5" 
-                           Content="Start Date:" 
-                           HorizontalAlignment="Left" 
-                           Margin="19,0,0,0" 
-                           Grid.Row="5" 
-                           VerticalAlignment="Top"
-                           Foreground="White"
-                           FontSize="15"
-                           FontFamily="/Fonts/#Poppins"/>
+                    <Label
+                        x:Name="label5"
+                        Grid.Row="5"
+                        Margin="19,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Start Date:"
+                        FontFamily="/Fonts/#Poppins"
+                        FontSize="15"
+                        Foreground="White" />
 
 
-                    <TextBox x:Name="moduleCode" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left"
-                             Margin="10,29,0,0" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top"
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
+                    <TextBox
+                        x:Name="moduleCode"
+                        Grid.Column="1"
+                        Width="208"
+                        Margin="10,29,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource modernText}"
+                        Text=""
+                        TextWrapping="Wrap" />
 
-                    <TextBox x:Name="moduleName" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left"
-                             Margin="10,0,0,0"
-                             Grid.Row="1" 
-                             TextWrapping="Wrap"
-                             Text=""
-                             VerticalAlignment="Center" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
+                    <TextBox
+                        x:Name="moduleName"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Width="208"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource modernText}"
+                        Text=""
+                        TextWrapping="Wrap" />
 
-                    <TextBox x:Name="credits" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,31,0,0" 
-                             Grid.Row="2" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-/>
+                    <TextBox
+                        x:Name="credits"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Width="208"
+                        Margin="10,31,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource modernText}"
+                        Text=""
+                        TextWrapping="Wrap" />
 
-                    <TextBox x:Name="classHour" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,0,0,0" 
-                             Grid.Row="3" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Center" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
+                    <TextBox
+                        x:Name="classHour"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Width="208"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource modernText}"
+                        Text=""
+                        TextWrapping="Wrap" />
 
-                    <TextBox x:Name="semesterWeek"
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,27,0,0" 
-                             Grid.Row="4" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
+                    <TextBox
+                        x:Name="semesterWeek"
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Width="208"
+                        Margin="10,27,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Style="{StaticResource modernText}"
+                        Text=""
+                        TextWrapping="Wrap" />
 
-                    <TextBox x:Name="startDate" 
-                             Grid.Column="1" 
-                             HorizontalAlignment="Left" 
-                             Margin="10,5,0,0" 
-                             Grid.Row="5" 
-                             TextWrapping="Wrap" 
-                             Text="" 
-                             VerticalAlignment="Top" 
-                             Width="208"
-                             Style="{StaticResource modernText}"
-                            />
+                    <StackPanel
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="10,55,10,-15"
+                        Orientation="Horizontal">
 
-                    <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="10,55,10,-15">
+                        <Button
+                            x:Name="addBtn"
+                            Width="70"
+                            Height="25"
+                            Background="#B0C4DE"
+                            Click="addBtn_Click"
+                            Content="Add"
+                            Foreground="Black"
+                            Style="{StaticResource ResourceKey=functionBtn}" />
 
-                        <Button x:Name="addBtn"                              
-                                Content="Add"
-                                Width="70"
-                                Height="25"
-                                Style="{StaticResource ResourceKey=functionBtn}"
-                                Foreground="Black"
-                                Background="#B0C4DE" Click="addBtn_Click"/>
+                        <Button
+                            x:Name="SubmitBtn"
+                            Width="70"
+                            Height="25"
+                            Margin="10,10"
+                            Background="#B0C4DE"
+                            Click="SubmitBtn_Click"
+                            Content="Submit"
+                            Foreground="Black"
+                            Style="{StaticResource functionBtn}" />
 
-                        <Button x:Name="SubmitBtn" 
-                                Content="Submit"
-                                 Margin="10,10"
-                                 Width="70"
-                                Height="25"
-                                Style="{StaticResource functionBtn}"
-                                Foreground="Black"
-                                Background="#B0C4DE" Click="SubmitBtn_Click"/>
-
-                        <Button x:Name="ClearBtn" 
-                                Content="Clear"
-                                Margin="0,10"
-                                Width="70"
-                                Height="25"
-                                Style="{StaticResource functionBtn}"
-                                Foreground="Black"
-                                Background="#B0C4DE" Click="ClearBtn_Click"/>
+                        <Button
+                            x:Name="ClearBtn"
+                            Width="70"
+                            Height="25"
+                            Margin="0,10"
+                            Background="#B0C4DE"
+                            Click="ClearBtn_Click"
+                            Content="Clear"
+                            Foreground="Black"
+                            Style="{StaticResource functionBtn}" />
 
                     </StackPanel>
+                    <DatePicker
+                        x:Name="startDate"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Width="228"
+                        Height="51"
+                        Margin="10,4,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" />
 
                 </Grid>
 
 
             </ContentControl>
 
+            <Image
+                Grid.Row="1"
+                Margin="48,413,48,33"
+                RenderTransformOrigin="0.312,8.906"
+                Source="\Icons\classroom.png" />
 
+            <Image
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="696,449,0,-2"
+                RenderTransformOrigin="0.312,8.906"
+                Source="\Icons\school-bag (1).png" />
 
 
         </Grid>

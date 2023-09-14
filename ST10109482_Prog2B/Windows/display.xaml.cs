@@ -43,32 +43,43 @@ namespace ST10109482_Prog2B.Windows
         {
 
             StringBuilder stringBuilder = new StringBuilder();
-
-            //foreach (var kvp in ModuleInfo)
-            //{
-            //    foreach (var module in kvp.Value)
-            //    {
-            //        stringBuilder.AppendLine($"Module ID: {kvp.Key}" );
-            //        stringBuilder.AppendLine($"Credits: {module.Credits}");
-            //        stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
-            //        stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
-            //        stringBuilder.AppendLine($"Self Study Hours: {module.StudyHours}");
-            //        // Append other module properties...
-            //        stringBuilder.AppendLine(); // Add an empty line between modules
-            //    }
-            //}
-
-            displayTxt.Text = stringBuilder.ToString();
-
             updateStudyTime update = new updateStudyTime(ModuleInfo, records, recordInfo);
 
-          // foreach(var item in records)
-          // {
-          string enteredModule = searchTxt.Text;
-              stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
-          // }
+            DateTime date = DateTime.Now;
+
+            //if (date.Day.Equals(7))
+           // {
+                string enteredModule = searchTxt.Text;
+                stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
+          //  }
+
+            //  //foreach (var kvp in ModuleInfo)
+            //  //{
+            //  //    foreach (var module in kvp.Value)
+            //  //    {
+            //  //        stringBuilder.AppendLine($"Module ID: {kvp.Key}" );
+            //  //        stringBuilder.AppendLine($"Credits: {module.Credits}");
+            //  //        stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
+            //  //        stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
+            //  //        stringBuilder.AppendLine($"Self Study Hours: {module.StudyHours}");
+            //  //        // Append other module properties...
+            //  //        stringBuilder.AppendLine(); // Add an empty line between modules
+            //  //    }
+            //  //}
 
             displayTxt.Text = stringBuilder.ToString();
+
+           // di
+
+            //  updateStudyTime update = new updateStudyTime(ModuleInfo, records, recordInfo);
+
+            //// foreach(var item in records)
+            //// {
+            //string enteredModule = searchTxt.Text;
+            //    stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
+            //// }
+
+            //  displayTxt.Text = stringBuilder.ToString();
 
             //StringBuilder stringBuilder = new StringBuilder();
 
@@ -108,6 +119,13 @@ namespace ST10109482_Prog2B.Windows
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void addHours_click(object sender, RoutedEventArgs e)
+        {
+            updateStudyTime upt = new updateStudyTime(ModuleInfo, records, recordInfo);
+            this.Close();
+            upt.Show();
         }
     }
 }

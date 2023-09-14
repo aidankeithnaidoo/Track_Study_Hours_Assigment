@@ -1,91 +1,123 @@
-﻿<Window x:Class="ST10109482_Prog2B.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ST10109482_Prog2B"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1000"        
-        WindowStyle= "None"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True">
+﻿<Window
+    x:Class="ST10109482_Prog2B.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ST10109482_Prog2B"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1000"
+    Height="650"
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
 
-    <Border Background="#272537"
-            CornerRadius="20">
+    <Border Background="#272537" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions >
-                <RowDefinition Height="75"/>
-                <RowDefinition/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Study Planner"
-                   VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="22"
-                       Margin="20,0,0,0"/>
-
-            <Button HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Width="30"
-                    Height="30"
-                    Margin="760,10,0,0"                    
-                    Click="Button_Click"
-                    Grid.Column="1"
-                    >
+            <Button
+                Grid.Column="1"
+                Width="30"
+                Height="30"
+                Margin="760,10,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Button_Click">
 
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Image Source="Images\icons8-close-window-96.png" Width="25" Height="25"/>
+                        <Image
+                            Width="25"
+                            Height="25"
+                            Source="Images\icons8-close-window-96.png" />
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
-            <StackPanel Grid.Row="1" Background="#1F1E2A">
+            <Border
+                BorderBrush="Black"
+                BorderThickness="1"
+                CornerRadius="20" Grid.RowSpan="2">
+                
+                <StackPanel Grid.RowSpan="2" Margin="0,0,0,-1">
 
-                <Button Content="Home"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}"/>
-
-                <Button Content="Add Course"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="addCourseSwitch_click"                            
-                             />
-
-                <Button Content="Display"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="display_click"/>
-
-
-                <Button Content="Add Study Hours"
-                             Height="50"
-                             Foreground="White" 
-                             FontSize="20"
-                             Style="{StaticResource buttonTheme}" Click="addHours_click"/>
-
-
-            </StackPanel>
+                    <StackPanel.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                            <GradientStop Offset="0.0" Color="#5BC3FF" />
+                            <GradientStop Offset="1" Color="#1e5abf" />
+                        </LinearGradientBrush>
+                    </StackPanel.Background>
 
 
 
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10"/>
+                    <TextBlock
+                        Margin="20,20,10,50"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="22"
+                        Foreground="White"
+                        Text="Study Planner" />
+
+                    <Button
+                        Height="50"
+                        Content="Home"
+                        FontSize="20"
+                        Foreground="White"
+                        Style="{StaticResource buttonTheme}" />
 
 
+                    <Button
+                        Height="50"
+                        Click="display_click"
+                        Content="Display"
+                        FontSize="20"
+                        Foreground="White"
+                        Style="{StaticResource buttonTheme}" />
+
+
+                    <Button
+                        Height="50"
+                        Click="addCourseSwitch_click"
+                        Content="Add Course"
+                        FontSize="20"
+                        Foreground="White"
+                        Style="{StaticResource buttonTheme}" />
+
+                    <Button
+                        Height="50"
+                        Click="addHours_click"
+                        Content="Add Study Hours"
+                        FontSize="20"
+                        Foreground="White"
+                        Style="{StaticResource buttonTheme}" />
+
+                </StackPanel>
+            </Border>
+
+
+
+            <ContentControl
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="10" />
+
+            <Image
+                Grid.Row="1"
+                Margin="48,413,48,33"
+                RenderTransformOrigin="0.312,8.906"
+                Source="Icons\knowledge.png" />
 
         </Grid>
     </Border>

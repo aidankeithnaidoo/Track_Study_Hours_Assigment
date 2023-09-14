@@ -63,6 +63,9 @@
     <Compile Include="Windows\display.xaml.cs">
       <DependentUpon>display.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\updateStudyTime.xaml.cs">
       <DependentUpon>updateStudyTime.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\display.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,9 +154,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\back-to-school.png" />
+    <Resource Include="Icons\school-bag.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icons8-close-window-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\classroom.png" />
+    <Resource Include="Icons\graduation-hat.png" />
+    <Resource Include="Icons\knowledge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\school-bag %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
