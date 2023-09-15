@@ -169,5 +169,9 @@
   <ItemGroup>
     <Resource Include="Icons\school-bag %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\graduating-student.png" />
+    <Resource Include="Icons\mortarboard.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
