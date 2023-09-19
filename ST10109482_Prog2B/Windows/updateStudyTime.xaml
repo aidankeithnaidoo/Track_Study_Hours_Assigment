@@ -132,10 +132,10 @@
 
                     <Label
                         x:Name="label1"
-                        Grid.Row="1"
-                        Margin="20,0,0,0"
+                        Grid.Row="2"
+                        Margin="20,31,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Top"
                         Content="Hours Studied:"
                         FontFamily="/Fonts/#Poppins"
                         FontSize="15"
@@ -143,7 +143,7 @@
 
                     <Label
                         x:Name="label2"
-                        Grid.Row="2"
+                        Grid.Row="1"
                         Margin="20,24,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
@@ -153,26 +153,14 @@
                         Foreground="White" />
 
 
-                    <TextBox
-                        x:Name="moduleCode"
-                        Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Width="230"
-                        Margin="10,29,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Style="{StaticResource modernText}"
-                        Text=""
-                        TextWrapping="Wrap" />
+
 
                     <TextBox
                         x:Name="hourStudyTxt"
-                        Grid.Row="1"
+                        Grid.Row="2"
                         Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Width="230"
-                        Margin="10,0,0,0"
-                        HorizontalAlignment="Left"
+                        Width="174"
+                        HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Style="{StaticResource modernText}"
                         Text=""
@@ -212,14 +200,40 @@
                     </StackPanel>
                     <DatePicker
                         x:Name="datePicker"
-                        Grid.Row="2"
+                        Grid.Row="1"
                         Grid.Column="1"
-                        Grid.ColumnSpan="2"
-                        Width="230"
-                        Height="70"
-                        Margin="10,0,0,0"
+                        Width="174"
+                        Height="26"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top" />
+
+                    <Label
+                        x:Name="label3"
+                        Grid.Column="2"
+                        Width="169"
+                        Margin="14,0,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center" />
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
+                    <Label
+                        x:Name="label4"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Width="169"
+                        Margin="14,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
+                    <ComboBox
+                        x:Name="moduleCodeCombo"
+                        Grid.Column="1"
+                        Width="174"
+                        Margin="0,38,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top" />
                 </Grid>
             </ContentControl>
 

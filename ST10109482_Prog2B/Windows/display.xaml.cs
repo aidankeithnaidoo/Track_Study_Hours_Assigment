@@ -1,6 +1,6 @@
-﻿using ST10109482_Prog2B.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using studyPlanner_dll;
 
 namespace ST10109482_Prog2B.Windows
 {
@@ -20,85 +21,67 @@ namespace ST10109482_Prog2B.Windows
     /// </summary>
     public partial class display : Window
     {
-        List<RecordData> records = new List<RecordData>();
-        public List<Module> moduleList = new List<Module>();
+        private List<RecordData> records = new List<RecordData>();
+        private List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
+        private ObservableCollection <string> moduleCode = new ObservableCollection<string>();
 
 
         public display()
         {
             InitializeComponent();
+            addToCombo();
+            moduleCodeCombo.ItemsSource = moduleCode;
         }
 
-        public display(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records, Dictionary<int, List<RecordData>> recordInfo)
+        public display(List<Module> PmoduleList,Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo)
         {
             InitializeComponent();
-            this.ModuleInfo = ModuleInfo;
-            this.records = records;
-            this.recordInfo = recordInfo;
+            ModuleInfo = PModuleInf;
+            records = Precords;
+            recordInfo = PrecordInfo;
+            moduleList = PmoduleList;
+            addToCombo();
+            moduleCodeCombo.ItemsSource = moduleCode;
         }
 
         private void displayBtn_Click(object sender, RoutedEventArgs e)
         {
 
             StringBuilder stringBuilder = new StringBuilder();
-            updateStudyTime update = new updateStudyTime(ModuleInfo, records, recordInfo);
+            updateStudyTime update = new updateStudyTime(moduleList,ModuleInfo, records, recordInfo);
 
             DateTime date = DateTime.Now;
 
-            //if (date.Day.Equals(7))
-           // {
-                string enteredModule = searchTxt.Text;
-                stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
-          //  }
+            string enteredModule = moduleCodeCombo.SelectedValue.ToString();
+            int weekCount = 1;
 
-            //  //foreach (var kvp in ModuleInfo)
-            //  //{
-            //  //    foreach (var module in kvp.Value)
-            //  //    {
-            //  //        stringBuilder.AppendLine($"Module ID: {kvp.Key}" );
-            //  //        stringBuilder.AppendLine($"Credits: {module.Credits}");
-            //  //        stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
-            //  //        stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
-            //  //        stringBuilder.AppendLine($"Self Study Hours: {module.StudyHours}");
-            //  //        // Append other module properties...
-            //  //        stringBuilder.AppendLine(); // Add an empty line between modules
-            //  //    }
-            //  //}
+            var moduleInfoQuery = ModuleInfo
+                                  .Where(kvp => kvp.Value.Any(moduleList => moduleList.ModuleCode == enteredModule))
+                                  .SelectMany(kvp => kvp.Value);
+
+            
+            foreach (var module in moduleInfoQuery)
+            {
+                stringBuilder.AppendLine($"Week: {weekCounter(weekCount)}");
+                stringBuilder.AppendLine($"Module ID: {module.ModuleCode}");
+                stringBuilder.AppendLine($"Credits: {module.Credits}");
+                stringBuilder.AppendLine($"Module Code: {module.ModuleCode}");
+                stringBuilder.AppendLine($"Module Name: {module.ModuleName}");
+                stringBuilder.AppendLine($"Self Study Hours: {module.StudyHours}");
+                // Append other module properties...
+                stringBuilder.AppendLine(); // Add an empty line between modules
+            }
+
+            //stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
 
             displayTxt.Text = stringBuilder.ToString();
-
-           // di
-
-            //  updateStudyTime update = new updateStudyTime(ModuleInfo, records, recordInfo);
-
-            //// foreach(var item in records)
-            //// {
-            //string enteredModule = searchTxt.Text;
-            //    stringBuilder.AppendLine($"Update time: {update.calcWeekHour(enteredModule)}");
-            //// }
-
-            //  displayTxt.Text = stringBuilder.ToString();
-
-            //StringBuilder stringBuilder = new StringBuilder();
-
-            //foreach (var module in records)
-            //{
-            //    stringBuilder.AppendLine($"Module Code: {module.MCode}");
-            //    stringBuilder.AppendLine($"Hour Studied: {module.HoursRecorded}");
-            //    stringBuilder.AppendLine($"Date captured: {module.StudyDate}");
-            //    // Append other module properties...
-            //    stringBuilder.AppendLine(); // Add an empty line between modules
-            //}
-
-            //displayTxt.Text = stringBuilder.ToString();
-
         }
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {
-            captureWindow cw = new captureWindow(ModuleInfo, records, recordInfo);
+            captureWindow cw = new captureWindow(moduleList, ModuleInfo, records, recordInfo);
             this.Close();
             cw.Show();
         }
@@ -106,7 +89,7 @@ namespace ST10109482_Prog2B.Windows
 
         private void home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(ModuleInfo, records,recordInfo);
+            MainWindow mw = new MainWindow(moduleList,ModuleInfo, records,recordInfo);
             this.Close();
             mw.Show();
         }
@@ -123,9 +106,33 @@ namespace ST10109482_Prog2B.Windows
 
         private void addHours_click(object sender, RoutedEventArgs e)
         {
-            updateStudyTime upt = new updateStudyTime(ModuleInfo, records, recordInfo);
+            updateStudyTime upt = new updateStudyTime(moduleList, ModuleInfo, records, recordInfo);
             this.Close();
             upt.Show();
+        }
+
+        public int weekCounter(int weekCount)
+        {
+            DateTime dt = new DateTime();
+
+            if (dt.Day.Equals(1))
+            {
+                weekCount++;
+            }
+            return weekCount;
+        }
+
+        public void addToCombo()
+        {
+            foreach(var item in moduleList)
+            {
+                moduleCode.Add(item.ModuleCode.ToUpper());
+            }
+        }
+
+        private void displayAllBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

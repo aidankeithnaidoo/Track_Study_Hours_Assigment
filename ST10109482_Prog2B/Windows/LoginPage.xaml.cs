@@ -1,5 +1,4 @@
-﻿using ST10109482_Prog2B.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using studyPlanner_dll;
 
 namespace ST10109482_Prog2B.Windows
 {
@@ -31,13 +31,13 @@ namespace ST10109482_Prog2B.Windows
             InitializeComponent();
         }
 
-        public LoginPage(Dictionary<int, List<Module>> ModuleInfo, Dictionary<int, List<RecordData>> recordInfo, List<Module> moduleList, List<RecordData> records)
+        public LoginPage(Dictionary<int, List<studyPlanner_dll.Module>> PModuleInf, List<studyPlanner_dll.RecordData> Precords, Dictionary<int, List<studyPlanner_dll.RecordData>> PrecordInfo)
         {
             InitializeComponent();
-            this.recordInfo = recordInfo;
-            this.moduleList = moduleList;
-            this.records = records; 
-            this.ModuleInfo = ModuleInfo;
+            recordInfo = PrecordInfo;
+            //this.moduleList = moduleList;
+            records = Precords; 
+            ModuleInfo = PModuleInf;
         }
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)

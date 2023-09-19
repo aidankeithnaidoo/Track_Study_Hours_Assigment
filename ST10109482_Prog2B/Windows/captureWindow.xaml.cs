@@ -1,5 +1,4 @@
-﻿using ST10109482_Prog2B.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using studyPlanner_dll;
 
 namespace ST10109482_Prog2B.Windows
 {
@@ -20,8 +20,11 @@ namespace ST10109482_Prog2B.Windows
     /// </summary>
     public partial class captureWindow : Window
     {
-        List<RecordData> records = new List<RecordData>();
-        public List<Module> moduleList = new List<Module>();
+        
+        Functions functions = new Functions(); 
+
+        private List<RecordData> records = new List<RecordData>();
+        private List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
 
@@ -31,12 +34,13 @@ namespace ST10109482_Prog2B.Windows
             InitializeComponent();
         }
 
-        public captureWindow(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records, Dictionary<int, List<RecordData>> recordInfo)
+        public captureWindow(List<Module> PmoduleList,Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo)
         {
             InitializeComponent();
-            this.ModuleInfo = ModuleInfo;
-            this.records = records;
-            this.recordInfo = recordInfo;   
+            ModuleInfo = PModuleInf;
+            records = Precords;
+            recordInfo = PrecordInfo;   
+            moduleList = PmoduleList;
         }
         private void close_Click(object sender, RoutedEventArgs e)
         {
@@ -45,14 +49,15 @@ namespace ST10109482_Prog2B.Windows
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Module md = new Module();
+           studyPlanner_dll.Validation valid = new studyPlanner_dll.Validation();
+
             string code = moduleCode.Text.ToUpper();
             string courseName = moduleName.Text;
             int courseCredit = Convert.ToInt32(credits.Text);
             double hoursPerWeek = Convert.ToDouble(classHour.Text);
             int numWeeks = Convert.ToInt32(semesterWeek.Text);
             string startingDate = startDate.Text;
-            double StudyHours = (courseCredit * 10 / numWeeks) - hoursPerWeek;
+            double StudyHours = functions.calcStudyHours(courseCredit, numWeeks, hoursPerWeek);
             double recordedHours = 0;
 
 
@@ -74,22 +79,29 @@ namespace ST10109482_Prog2B.Windows
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            int count = 0; // Start the key from 1 or any other appropriate value
-
             foreach (Module item in moduleList)
             {
-                if (!ModuleInfo.ContainsKey(count))
+                // Check if the module already exists in the dictionary
+                bool moduleExists = ModuleInfo.Values.Any(moduleList => moduleList.Any(module => module.ModuleCode == item.ModuleCode));
+
+                if (!moduleExists)
                 {
-                    ModuleInfo[count] = new List<Module>();
+                    int count = 1; // Start the key from 1 or any other appropriate value
+
+                    // Find the next available key
+                    while (ModuleInfo.ContainsKey(count))
+                    {
+                        count++;
+                    }
+
+                    // Create a new list and add the module
+                    ModuleInfo[count] = new List<Module> { item };
                 }
-
-                ModuleInfo[count].Add(item); // Add the IdentityInfo to the list under the key
             }
-
-            count = count++;
-
             MessageBox.Show("List of modules created");
         }
+
+
 
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -103,32 +115,40 @@ namespace ST10109482_Prog2B.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(ModuleInfo, records, recordInfo);
+            MainWindow mw = new MainWindow(moduleList,ModuleInfo, records, recordInfo);
             mw.Show();
             this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            updateStudyTime udt = new updateStudyTime(ModuleInfo, records, recordInfo);
+            updateStudyTime udt = new updateStudyTime(moduleList, ModuleInfo, records, recordInfo);
             this.Close();
             udt.Show();
         }
 
-        public double getSelfHours()
-        {
-            var selfHours = from h in moduleList
-                            where h.StudyHours > 0
-                            select h.StudyHours;
-
-            return Convert.ToDouble(selfHours);
-        }
-
         private void displayBtn_Click(object sender, RoutedEventArgs e)
         {
-            display ds = new display(ModuleInfo,records,recordInfo);
+            display ds = new display(moduleList,ModuleInfo,records,recordInfo);
             this.Close();
             ds.Show();
         }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatePicker datePicker = (DatePicker)sender;
+            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.MinValue; // Handle null selected date
+
+            // Get the current date
+            DateTime currentDate = DateTime.Now.Date;
+
+            // Check if the selected date is before the current date
+            if (selectedDate < currentDate)
+            {
+                MessageBox.Show("Please select a date on or after the current date.");
+                datePicker.SelectedDate = currentDate; // Reset the date to the current date
+            }
+        }
+
     }
 }

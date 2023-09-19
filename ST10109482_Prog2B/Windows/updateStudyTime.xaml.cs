@@ -1,6 +1,6 @@
-﻿using ST10109482_Prog2B.Setup;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using studyPlanner_dll;
 
 namespace ST10109482_Prog2B.Windows
 {
@@ -21,43 +22,50 @@ namespace ST10109482_Prog2B.Windows
     /// </summary>
     public partial class updateStudyTime : Window
     {
-        List<RecordData> records = new List<RecordData>();
-        public List<Module> moduleList = new List<Module>();
+        private List<RecordData> records = new List<RecordData>();
+        private List<Module> moduleList = new List<Module>();
 
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
+        private ObservableCollection<string> moduleCode = new ObservableCollection<string>();
+
 
         public updateStudyTime()
         {
             InitializeComponent();
+            addCombo();
+            moduleCodeCombo.ItemsSource = moduleCode;
         }
 
-        public updateStudyTime(Dictionary<int, List<Module>> ModuleInfo, List<RecordData> records, Dictionary<int, List<RecordData>> recordInfo)
+        public updateStudyTime(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo)
         {
             InitializeComponent();
-            this.ModuleInfo = ModuleInfo;
-            this.records = records;
-            this.recordInfo = recordInfo;
+            ModuleInfo = PModuleInf;
+            records = Precords;
+            recordInfo = PrecordInfo;
+            moduleList = PmoduleList;
+            addCombo();
+            moduleCodeCombo.ItemsSource = moduleCode;
         }
 
 
         private void home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(ModuleInfo, records, recordInfo);
+            MainWindow mw = new MainWindow(moduleList,ModuleInfo, records, recordInfo);
             this.Close();
             mw.Show();
         }
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {   
-            captureWindow cw = new captureWindow(ModuleInfo, records, recordInfo);
+            captureWindow cw = new captureWindow(moduleList,ModuleInfo, records, recordInfo);
             this.Close();
             cw.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            display ds = new display(ModuleInfo, records, recordInfo);
+            display ds = new display(moduleList,ModuleInfo, records, recordInfo);
             this.Close();
             ds.Show();
         }
@@ -69,7 +77,7 @@ namespace ST10109482_Prog2B.Windows
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            string code = moduleCode.Text;
+            string code = moduleCodeCombo.SelectedValue.ToString();
             double hours = Convert.ToDouble(hourStudyTxt.Text);
             double tempVar = 0;
             string date = datePicker.Text;
@@ -105,6 +113,7 @@ namespace ST10109482_Prog2B.Windows
         {
 
             var totalHours = 0;
+            double selfHours = GetSelfHours(search);
 
             foreach (var item in records)
             {
@@ -118,51 +127,25 @@ namespace ST10109482_Prog2B.Windows
                 }
             }
 
-            return totalHours;
+            return (int)(selfHours - totalHours);
+        }
 
+        public void addCombo()
+        {
+            foreach(var item in moduleList)
+            {
+                moduleCode.Add(item.ModuleCode.ToUpper());
+            }
+        }
 
-            //SELECT ALL WHERE MODULECODE = MODULECODE
-            //ADD EVERYTHING TO A DICOTNARY AND THAT WILL BE LIKE A DUMMY STORAGE AND WE CAN SORT FROM THERE 
-            //DateTime date = DateTime.Now;
-            //DatePicker datePicker = new DatePicker();
+        public double GetSelfHours(string search)
+        {
+            double selfHours = (from h in moduleList
+                                where h.StudyHours > 0 && h.ModuleCode == search
+                                select h.StudyHours)
+                                .FirstOrDefault();
 
-            ////string enteredModuleName = moduleCode.Text;
-            //var totalHoursForModule = 0; // Default value if no modules are found
-            //var totalHours = 0;
-
-            //foreach (var module in moduleList)
-            //{
-            //    // Calculate the total hours from records for the current module code (MCode)
-            //     totalHours = (int)records
-            //        .Where(h => h.HoursRecorded > 0 && h.MCode == module.ModuleCode)
-            //        .Sum(h => h.HoursRecorded);
-
-            //    // Update the recordedHours property of the current module with the calculated total hours
-            //    module.RecordedHours = totalHours;
-            //}
-
-            //return (int)(totalHoursForModule - totalHours);
-
-            ////totalHoursForModule = (int)moduleList.Where(module => module.ModuleCode == search);
-
-
-            //            // Now, totalHoursForModule will contain the sum of StudyHours for the specified module
-
-
-
-            //            //var totalHoursForModule = ModuleInfo.Values
-            //            //        .SelectMany(moduleList => moduleList)
-            //            //        .Where(module => module.ModuleName == moduleCode.Text)
-            //            //        .Sum(module => module.StudyHours);
-            //    }
-
-            ////if (!search.Equals(search))
-            //        //{
-            //        //    totalHours = 0;
-            //        //}
-
-            //// If the condition is not met, you may want to return a default value or handle it differently
-            ////return 0; // For example, return 0 if the condition is not met
+            return selfHours;
         }
     }
  

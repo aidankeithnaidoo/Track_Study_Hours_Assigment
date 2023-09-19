@@ -304,7 +304,54 @@
                         Height="51"
                         Margin="10,4,0,0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top" />
+                        VerticalAlignment="Top"
+                        SelectedDateChanged="DatePicker_SelectedDateChanged" />
+                    <Label
+                        x:Name="moduleCodeError"
+                        Grid.Column="2"
+                        Width="202"
+                        Margin="0,25,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Content=""
+                        Foreground="White" />
+                    <Label
+                        x:Name="moduleNameError"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Width="202"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
+                    <Label
+                        x:Name="creditError"
+                        Grid.Row="2"
+                        Grid.Column="2"
+                        Width="202"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
+                    <Label
+                        x:Name="hoursError"
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Width="202"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
+                    <Label
+                        x:Name="weeksError"
+                        Grid.Row="4"
+                        Grid.Column="2"
+                        Width="202"
+                        Margin="0,27,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Content=""
+                        Foreground="White" />
 
                 </Grid>
 
