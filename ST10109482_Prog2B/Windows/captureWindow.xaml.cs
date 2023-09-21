@@ -27,6 +27,9 @@ namespace ST10109482_Prog2B.Windows
         private List<Module> moduleList = new List<Module>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
+        private Dictionary<string, weekTracker> weekTrack = new Dictionary<string, weekTracker>();
+        private Dictionary<int, double> weekInfo = new Dictionary<int, double>();
+        private Dictionary<int, double> tempInfo = new Dictionary<int, double>();
 
 
         public captureWindow()
@@ -34,13 +37,15 @@ namespace ST10109482_Prog2B.Windows
             InitializeComponent();
         }
 
-        public captureWindow(List<Module> PmoduleList,Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo)
+        public captureWindow(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo, Dictionary<string, weekTracker> PweekTrack, Dictionary<int, double> PweekInfo)
         {
             InitializeComponent();
             ModuleInfo = PModuleInf;
             records = Precords;
-            recordInfo = PrecordInfo;   
+            recordInfo = PrecordInfo;
             moduleList = PmoduleList;
+            weekTrack = PweekTrack;
+            weekInfo = PweekInfo;
         }
         private void close_Click(object sender, RoutedEventArgs e)
         {
@@ -101,8 +106,6 @@ namespace ST10109482_Prog2B.Windows
             MessageBox.Show("List of modules created");
         }
 
-
-
         private void ClearBtn_Click(object sender, RoutedEventArgs e)
         {
             moduleCode.Text = string.Empty;
@@ -115,21 +118,21 @@ namespace ST10109482_Prog2B.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(moduleList,ModuleInfo, records, recordInfo);
+            MainWindow mw = new MainWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             mw.Show();
             this.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            updateStudyTime udt = new updateStudyTime(moduleList, ModuleInfo, records, recordInfo);
+            updateStudyTime udt = new updateStudyTime(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             udt.Show();
         }
 
         private void displayBtn_Click(object sender, RoutedEventArgs e)
         {
-            display ds = new display(moduleList,ModuleInfo,records,recordInfo);
+            display ds = new display(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             ds.Show();
         }
@@ -149,6 +152,5 @@ namespace ST10109482_Prog2B.Windows
                 datePicker.SelectedDate = currentDate; // Reset the date to the current date
             }
         }
-
     }
 }

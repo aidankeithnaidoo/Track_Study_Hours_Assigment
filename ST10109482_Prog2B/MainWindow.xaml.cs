@@ -26,19 +26,24 @@ namespace ST10109482_Prog2B
         private List<RecordData> records = new List<RecordData>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
+        private Dictionary<string, weekTracker> weekTrack = new Dictionary<string, weekTracker>();
+        private Dictionary<int, double> weekInfo = new Dictionary<int, double>();
+        private Dictionary<int, double> tempInfo = new Dictionary<int, double>();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        public MainWindow(List<Module> PmoduleList,Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords,Dictionary<int, List<RecordData>> PrecordInfo)
+        public MainWindow(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo, Dictionary<string, weekTracker> PweekTrack, Dictionary<int, double> PweekInfo)
         {
             InitializeComponent();
             ModuleInfo = PModuleInf;
             records = Precords;
             recordInfo = PrecordInfo;
             moduleList = PmoduleList;
+            weekTrack = PweekTrack;
+            weekInfo = PweekInfo;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,7 +53,7 @@ namespace ST10109482_Prog2B
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {
-            captureWindow cw = new captureWindow(moduleList, ModuleInfo, records, recordInfo);
+            captureWindow cw = new captureWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             cw.Show();
         }
@@ -57,16 +62,21 @@ namespace ST10109482_Prog2B
 
         private void display_click(object sender, RoutedEventArgs e)
         {
-            display ds = new display(moduleList, ModuleInfo,records, recordInfo);
+            display ds = new display(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             ds.Show();
         }
 
         private void addHours_click(object sender, RoutedEventArgs e)
         {
-            updateStudyTime updateStudyTime = new updateStudyTime(moduleList, ModuleInfo,records, recordInfo);
+            updateStudyTime updateStudyTime = new updateStudyTime(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             updateStudyTime.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

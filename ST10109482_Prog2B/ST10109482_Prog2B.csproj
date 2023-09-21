@@ -36,7 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="studyPlanner_dll">
+    <Reference Include="studyPlanner_dll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\StudyPlanner_ST10109482\StudyPlanner_ST10109482\bin\Debug\studyPlanner_dll.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -59,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="weekTracker.cs" />
     <Compile Include="Windows\captureWindow.xaml.cs">
       <DependentUpon>captureWindow.xaml</DependentUpon>
     </Compile>

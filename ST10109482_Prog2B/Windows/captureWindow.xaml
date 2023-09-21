@@ -306,6 +306,8 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         SelectedDateChanged="DatePicker_SelectedDateChanged" />
+
+
                     <Label
                         x:Name="moduleCodeError"
                         Grid.Column="2"

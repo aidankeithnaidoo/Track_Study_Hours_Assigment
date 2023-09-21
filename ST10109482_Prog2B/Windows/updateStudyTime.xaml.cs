@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,9 @@ namespace ST10109482_Prog2B.Windows
 
         private Dictionary<int, List<RecordData>> recordInfo = new Dictionary<int, List<RecordData>>();
         private Dictionary<int, List<Module>> ModuleInfo = new Dictionary<int, List<Module>>();
+        private Dictionary<string, weekTracker> weekTrack = new Dictionary<string, weekTracker>();
+        private Dictionary<int, double> weekInfo = new Dictionary<int, double>();
+        private Dictionary<int, double> tempInfo = new Dictionary<int, double>();
         private ObservableCollection<string> moduleCode = new ObservableCollection<string>();
 
 
@@ -37,35 +41,37 @@ namespace ST10109482_Prog2B.Windows
             moduleCodeCombo.ItemsSource = moduleCode;
         }
 
-        public updateStudyTime(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo)
+        public updateStudyTime(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo, Dictionary<string, weekTracker> PweekTrack, Dictionary<int, double> PweekInfo)
         {
             InitializeComponent();
             ModuleInfo = PModuleInf;
             records = Precords;
             recordInfo = PrecordInfo;
             moduleList = PmoduleList;
+            weekTrack = PweekTrack;
+            weekInfo = PweekInfo;
             addCombo();
-            moduleCodeCombo.ItemsSource = moduleCode;
+            moduleCodeCombo.ItemsSource = moduleCode;            
         }
 
 
         private void home_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow(moduleList,ModuleInfo, records, recordInfo);
+            MainWindow mw = new MainWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             mw.Show();
         }
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
         {   
-            captureWindow cw = new captureWindow(moduleList,ModuleInfo, records, recordInfo);
+            captureWindow cw = new captureWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             cw.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            display ds = new display(moduleList,ModuleInfo, records, recordInfo);
+            display ds = new display(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             ds.Show();
         }
@@ -147,6 +153,55 @@ namespace ST10109482_Prog2B.Windows
 
             return selfHours;
         }
+
+       public void addWeeks(string search,double selfHours, int hours, string startDateString, string selectedDateString)
+        {
+            DateTime start = DateTime.Parse(startDateString);
+            DateTime selectedDate = DateTime.Parse(selectedDateString);
+            
+
+            int weeks = getNumWeeks(search);
+
+
+            for(int i = 1; i <= weeks;i++)
+            {                
+                tempInfo.Add(i, selfHours);
+            }
+
+            weekInfo = tempInfo;
+
+            TimeSpan newDiff = selectedDate - start;
+            int val = (int)Math.Abs(newDiff.TotalDays/7);
+
+            foreach(KeyValuePair<int,double> item in tempInfo)
+            {
+                if(item.Key == val)
+                {
+                    weekTrack[search] = new weekTracker(item.Key, item.Value);
+                    weekInfo[item.Key] = item.Value - hours;
+                    break;
+                }
+            }
+        }
+
+        public string getData(string search)
+        {
+            var query = from h in weekTrack
+                        where h.Key == search && h.Value != null
+                        select $"{h.Key}: {h.Value}";
+
+            return string.Join(", ", query);
+        }
+
+        public int getNumWeeks(string search)
+        {
+            int weeks = (from h in moduleList
+                         where h.SemsterWeeks > 0 && h.ModuleCode == search
+                         select h.SemsterWeeks).FirstOrDefault();
+
+            return weeks;
+
+        }
     }
- 
+
 }

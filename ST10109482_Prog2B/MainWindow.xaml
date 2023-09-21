@@ -91,7 +91,7 @@
                         Content="Home"
                         FontSize="20"
                         Foreground="White"
-                        Style="{StaticResource buttonTheme}" />
+                        Style="{StaticResource buttonTheme}" Click="Button_Click_1" />
 
 
                     <Button
@@ -128,6 +128,8 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="10" />
+            
+            
 
             <Image
                 Grid.Row="1"
