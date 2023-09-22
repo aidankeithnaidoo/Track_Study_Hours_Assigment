@@ -88,10 +88,11 @@
 
                     <Button
                         Height="50"
+                        Click="home_Click_1"
                         Content="Home"
                         FontSize="20"
                         Foreground="White"
-                        Style="{StaticResource buttonTheme}" Click="Button_Click_1" />
+                        Style="{StaticResource buttonTheme}" />
 
 
                     <Button
@@ -127,9 +128,238 @@
             <ContentControl
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="10" />
-            
-            
+                Margin="10">
+
+                <StackPanel>
+
+                    <TextBlock
+                        Margin="30,0,0,20"
+                        HorizontalAlignment="Left"
+                        FontSize="28"
+                        Foreground="White"
+                        Text="Discover" />
+
+                    <StackPanel Width="698" Orientation="Horizontal">
+                        <Button
+                            x:Name="Dsicoverbtn"
+                            Width="400"
+                            Height="200">
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                    <GradientStop Offset="0.0" Color="#5BC3FF" />
+                                    <GradientStop Offset="1" Color="#1e5abf" />
+                                </LinearGradientBrush>
+                            </Button.Background>
+
+                            <Button.Clip>
+                                <RectangleGeometry
+                                    RadiusX="10"
+                                    RadiusY="10"
+                                    Rect="0,0,400,200" />
+                            </Button.Clip>
+
+                            <Grid Width="318" Height="165">
+                                <TextBlock
+                                    Margin="-23,-2,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    FontSize="28"
+                                    Foreground="White"
+                                    Text="Welcome to your home&#xA;Enjoy The Experience" />
+
+                                <TextBlock
+                                    Margin="-23,99,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Text="Study Well Student" />
+
+
+                            </Grid>
+
+                        </Button>
+
+                        <Button
+                            x:Name="randombtn"
+                            Width="202"
+                            Height="200"
+                            Margin="35,0,0,0">
+
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                    <GradientStop Offset="0.0" Color="#ffc554" />
+                                    <GradientStop Offset="1" Color="#ffb834" />
+                                </LinearGradientBrush>
+                            </Button.Background>
+
+                            <Button.Clip>
+                                <RectangleGeometry
+                                    RadiusX="10"
+                                    RadiusY="10"
+                                    Rect="0,0,200,200" />
+                            </Button.Clip>
+
+
+
+                            <Grid Width="181" Height="190">
+                                <TextBlock
+                                    x:Name="textBlock"
+                                    Width="161"
+                                    Height="170"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Foreground="White"
+                                    Text="Enjoy life and make the most out of what you have. You are beautiful and strong"
+                                    TextWrapping="Wrap" />
+
+                            </Grid>
+                        </Button>
+
+                    </StackPanel>
+                    <StackPanel>
+
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="15,10,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock
+                            Margin="20,20,0,20"
+                            HorizontalAlignment="Left"
+                            FontSize="20"
+                            Foreground="White"
+                            Text="Recently Watched" />
+                        <StackPanel Width="717" Orientation="Horizontal">
+                            <Button
+                                x:Name="firstBtn"
+                                Width="150"
+                                Height="150"
+                                Margin="0"
+                                Click="firstBtn_Click">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                        <GradientStop Offset="0.0" Color="#4169E1" />
+                                        <GradientStop Offset="1" Color="#6A5ACD" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <Button.Clip>
+                                    <RectangleGeometry
+                                        RadiusX="15"
+                                        RadiusY="15"
+                                        Rect="0,0,150,150" />
+                                </Button.Clip>
+
+                                <Image
+                                    Width="66"
+                                    Height="66"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="\Icons\kpop.png" />
+                            </Button>
+
+
+                            <Button
+                                x:Name="secondBtn"
+                                Width="150"
+                                Height="150"
+                                Click="secondBtn_Click">
+
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                        <GradientStop Offset="0.0" Color="#48D1CC" />
+                                        <GradientStop Offset="1" Color="#40E0D0" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+
+                                <Button.Clip>
+                                    <RectangleGeometry
+                                        RadiusX="15"
+                                        RadiusY="15"
+                                        Rect="0,0,150,150" />
+                                </Button.Clip>
+
+                                <Image
+                                    Width="66"
+                                    Height="66"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="\Icons\audio.png" />
+
+                            </Button>
+
+                            <Button
+                                x:Name="thirdBtn"
+                                Width="150"
+                                Height="150"
+                                Click="thirdBtn_Click">
+
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                        <GradientStop Offset="0.0" Color="#CD5C5C" />
+                                        <GradientStop Offset="1" Color="#F08080" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+
+                                <Button.Clip>
+                                    <RectangleGeometry
+                                        RadiusX="15"
+                                        RadiusY="15"
+                                        Rect="0,0,150,150" />
+                                </Button.Clip>
+
+                                <Image
+                                    Width="66"
+                                    Height="66"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="\Icons\music-note.png" />
+
+
+                            </Button>
+
+                            <Button
+                                x:Name="forthBtn"
+                                Width="150"
+                                Height="150"
+                                Click="forthBtn_Click">
+
+                                <Image
+                                    Width="66"
+                                    Height="66"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Source="\Icons\electric-guitar.png" />
+
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                                        <GradientStop Offset="0.0" Color="#FF69B4" />
+                                        <GradientStop Offset="1" Color="#FFE4B5" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+
+
+                                <Button.Clip>
+                                    <RectangleGeometry
+                                        RadiusX="15"
+                                        RadiusY="15"
+                                        Rect="0,0,150,150" />
+                                </Button.Clip>
+                            </Button>
+
+
+                        </StackPanel>
+
+
+                    </StackPanel>
+                </StackPanel>
+
+
+
+            </ContentControl>
 
             <Image
                 Grid.Row="1"

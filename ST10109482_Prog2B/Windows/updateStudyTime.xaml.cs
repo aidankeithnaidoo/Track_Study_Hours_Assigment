@@ -39,6 +39,8 @@ namespace ST10109482_Prog2B.Windows
             InitializeComponent();
             addCombo();
             moduleCodeCombo.ItemsSource = moduleCode;
+            moduleCodeCombo.SelectedIndex = 0;
+            // This constructor initializes the updateStudyTime window without data.
         }
 
         public updateStudyTime(List<Module> PmoduleList, Dictionary<int, List<Module>> PModuleInf, List<RecordData> Precords, Dictionary<int, List<RecordData>> PrecordInfo, Dictionary<string, weekTracker> PweekTrack, Dictionary<int, double> PweekInfo)
@@ -51,22 +53,25 @@ namespace ST10109482_Prog2B.Windows
             weekTrack = PweekTrack;
             weekInfo = PweekInfo;
             addCombo();
-            moduleCodeCombo.ItemsSource = moduleCode;            
+            moduleCodeCombo.ItemsSource = moduleCode;
+            moduleCodeCombo.SelectedIndex = 0;
+            // This constructor initializes the updateStudyTime window with data.
         }
-
 
         private void home_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mw = new MainWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             mw.Show();
+            // Handles the home button click event, which returns to the main window.
         }
 
         private void addCourseSwitch_click(object sender, RoutedEventArgs e)
-        {   
+        {
             captureWindow cw = new captureWindow(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             cw.Show();
+            // Handles the addCourseSwitch button click event, which opens the captureWindow.
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -74,78 +79,75 @@ namespace ST10109482_Prog2B.Windows
             display ds = new display(moduleList, ModuleInfo, records, recordInfo, weekTrack, weekInfo);
             this.Close();
             ds.Show();
+            // Handles the Button_Click_1 event, which opens the display window.
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+            // Handles the close button click event, which closes the updateStudyTime window.
         }
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            string code = moduleCodeCombo.SelectedValue.ToString();
-            double hours = Convert.ToDouble(hourStudyTxt.Text);
-            double tempVar = 0;
-            string date = datePicker.Text;
-
-            records.Add(new RecordData(code, hours, date, tempVar)
+            if(testError())
             {
-                MCode = code,
-                HoursRecorded = hours,
-                StudyDate = date,
-                TempVar = tempVar
-            });
+                string code = moduleCodeCombo.SelectedValue.ToString();
+                double hours = Convert.ToDouble(hourStudyTxt.Text);
+                double tempVar = 0;
+                string date = datePicker.Text;
+
+                records.Add(new RecordData(code, hours, date, tempVar)
+                {
+                    MCode = code,
+                    HoursRecorded = hours,
+                    StudyDate = date,
+                    TempVar = tempVar
+                });
+                MessageBox.Show("Information Captured");
+            }
+            else
+            {
+
+            }
         }
 
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            int count = 0; // Start the key from 1 or any other appropriate value
+            
+                int count = 0; // Start the key from 1 or any other appropriate value
 
-            foreach (RecordData item in records)
-            {
-                if (!recordInfo.ContainsKey(count))
+                foreach (RecordData item in records)
                 {
-                    recordInfo[count] = new List<RecordData>();
+                    if (!recordInfo.ContainsKey(count))
+                    {
+                        recordInfo[count] = new List<RecordData>();
+                    }
+
+                    recordInfo[count].Add(item); // Add the IdentityInfo to the list under the key
+                    count++;
                 }
 
-                recordInfo[count].Add(item); // Add the IdentityInfo to the list under the key
-                count++;
-            }
-
-            MessageBox.Show("Record has been captured");
+                MessageBox.Show("Record has been captured");
+                // Handles the SubmitBtn button click event, which captures records and stores them in recordInfo.
+            
+            
         }
 
-        public int calcWeekHour(string search)
-        {
-
-            var totalHours = 0;
-            double selfHours = GetSelfHours(search);
-
-            foreach (var item in records)
-            {
-                totalHours = (int)(from h in records
-                                   where h.MCode == search && h.HoursRecorded > 0
-                                   select h.HoursRecorded).Sum();
-
-                if (search.Equals(item.MCode))
-                {
-                    item.TempVar = totalHours;
-                }
-            }
-
-            return (int)(selfHours - totalHours);
-        }
-
+        //Populates combo box
         public void addCombo()
         {
-            foreach(var item in moduleList)
+            // Adds module codes from moduleList to the moduleCode list.
+            foreach (var item in moduleList)
             {
                 moduleCode.Add(item.ModuleCode.ToUpper());
             }
         }
 
+        //Gets self astudy hgours
         public double GetSelfHours(string search)
         {
+            // Retrieves self study hours for a given module code from moduleList.
             double selfHours = (from h in moduleList
                                 where h.StudyHours > 0 && h.ModuleCode == search
                                 select h.StudyHours)
@@ -154,53 +156,158 @@ namespace ST10109482_Prog2B.Windows
             return selfHours;
         }
 
-       public void addWeeks(string search,double selfHours, int hours, string startDateString, string selectedDateString)
+        //This keeps track of weeks with remianing hours
+        public void addWeeks(string search, double selfHours, string startDateString)
         {
-            DateTime start = DateTime.Parse(startDateString);
-            DateTime selectedDate = DateTime.Parse(selectedDateString);
-            
+            string test = (from h in records
+                           where h.StudyDate != null && h.MCode == search
+                           select h.StudyDate).FirstOrDefault()?.ToString();
 
             int weeks = getNumWeeks(search);
 
 
-            for(int i = 1; i <= weeks;i++)
-            {                
+            for (int i = 1; i <= weeks; i++)
+            {
                 tempInfo.Add(i, selfHours);
             }
 
             weekInfo = tempInfo;
 
-            TimeSpan newDiff = selectedDate - start;
-            int val = (int)Math.Abs(newDiff.TotalDays/7);
-
-            foreach(KeyValuePair<int,double> item in tempInfo)
+            foreach (var record in records.Where(r => r.StudyDate != null && r.MCode == search).ToList())
             {
-                if(item.Key == val)
+                DateTime start = DateTime.Parse(startDateString);
+                DateTime selectedDate = DateTime.Parse(record.StudyDate.ToString());
+
+                TimeSpan newDiff = selectedDate - start;
+                int val = (int)Math.Abs(newDiff.TotalDays / 7);
+
+                foreach (KeyValuePair<int, double> item in tempInfo)
                 {
-                    weekTrack[search] = new weekTracker(item.Key, item.Value);
-                    weekInfo[item.Key] = item.Value - hours;
-                    break;
+                    if (item.Key == val)
+                    {
+                        weekInfo[item.Key] = item.Value - record.HoursRecorded;
+                        break;
+                    }
+                }
+
+                foreach (KeyValuePair<int, double> item in weekInfo)
+                {
+                    if (item.Key == val)
+                    {
+                        weekTrack[search] = new weekTracker(item.Key, item.Value);
+                        break;
+                    }
                 }
             }
         }
-
-        public string getData(string search)
-        {
-            var query = from h in weekTrack
-                        where h.Key == search && h.Value != null
-                        select $"{h.Key}: {h.Value}";
-
-            return string.Join(", ", query);
-        }
-
+        //gets the number of weeks in sesmeter
         public int getNumWeeks(string search)
         {
+            // Retrieves the number of weeks for a given module code from moduleList.
             int weeks = (from h in moduleList
                          where h.SemsterWeeks > 0 && h.ModuleCode == search
                          select h.SemsterWeeks).FirstOrDefault();
 
             return weeks;
+        }
 
+        //method gets the start date of semseter
+        public string getStartDate()
+        {
+            // Retrieves the start date from moduleList.
+            string date = (from h in moduleList
+                           where h.StartDate != null
+                           select h.StartDate).FirstOrDefault();
+
+            return date.ToString();
+        }
+
+        //Date validation
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Handles the date picker's selected date change event to ensure dates are not in the past.
+            DatePicker datePicker = (DatePicker)sender;
+            DateTime selectedDate = datePicker.SelectedDate ?? DateTime.MinValue; // Handle null selected date
+
+            // Get the current date
+            string current = getStartDate();
+            DateTime currentDate = DateTime.Parse(current);
+
+            // Check if the selected date is before the current date
+            if (selectedDate < currentDate)
+            {
+                MessageBox.Show("Please select a date on or after the current date.");
+                datePicker.SelectedDate = currentDate; // Reset the date to the current date
+            }
+        }
+
+        //Mehtod calls for validation
+        public bool testError()
+        {
+            // Validates input fields for adding study hours.
+            studyPlanner_dll.Validation vd = new studyPlanner_dll.Validation();
+
+            if (vd.ValidateOnEmpty(moduleCodeCombo.SelectedValue.ToString()) == false)
+            {
+                mError.Content = "Please enter a value";
+                return false;
+            }
+            else
+            {
+                mError.Content = "";
+            }
+
+            if (vd.ValidateOnEmpty(hourStudyTxt.Text) == false)
+            {
+                hError.Content = "Please enter a value";
+                return false;
+            }
+            else
+            {
+                hError.Content = "";
+            }
+
+            if (vd.ValidateOnEmpty(datePicker.Text) == false)
+            {
+                dError.Content = "Please enter a value";
+                return false;
+            }
+            else
+            {
+                dError.Content = "";
+            }
+
+            if (vd.validateInteger(hourStudyTxt.Text) == false)
+            {
+                hError.Content = "Please enter in a valid number";
+                return false;
+            }
+            else
+            {
+                hError.Content = "";
+            }
+
+            if (vd.ValidateCredit(Convert.ToInt32(hourStudyTxt.Text)) == false)
+            {
+                hError.Content = "hours have to be greater than zero";
+                return false;
+            }
+            else
+            {
+                hError.Content = "";
+            }
+
+            return true;
+        }
+
+        public string getData(string search)
+        {
+            string result = "";
+            foreach (var kvp in weekInfo)
+            {
+                result += $"Module Code: {search} Week: {kvp.Key} Remaining Hours: {kvp.Value}\n";
+            }
+            return result;
         }
     }
 

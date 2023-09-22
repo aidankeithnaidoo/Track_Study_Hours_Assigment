@@ -60,7 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="weekTracker.cs" />
     <Compile Include="Windows\captureWindow.xaml.cs">
       <DependentUpon>captureWindow.xaml</DependentUpon>
     </Compile>
@@ -176,6 +175,22 @@
   <ItemGroup>
     <Resource Include="Icons\graduating-student.png" />
     <Resource Include="Icons\mortarboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\support.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\audio.png" />
+    <Resource Include="Icons\electric-guitar.png" />
+    <Resource Include="Icons\fan.png" />
+    <Resource Include="Icons\kpop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\music-note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\Recording %282%29.m4a" />
+    <Content Include="Images\Recording.m4a" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

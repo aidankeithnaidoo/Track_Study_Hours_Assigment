@@ -206,10 +206,11 @@
                         Height="26"
                         Margin="0,30,0,0"
                         HorizontalAlignment="Center"
-                        VerticalAlignment="Top" />
+                        VerticalAlignment="Top"
+                        SelectedDateChanged="DatePicker_SelectedDateChanged" />
 
                     <Label
-                        x:Name="label3"
+                        x:Name="mError"
                         Grid.Column="2"
                         Width="169"
                         Margin="14,0,0,0"
@@ -218,11 +219,11 @@
                         Content=""
                         Foreground="White" />
                     <Label
-                        x:Name="label4"
+                        x:Name="hError"
                         Grid.Row="2"
                         Grid.Column="2"
-                        Width="169"
-                        Margin="14,0,0,0"
+                        Width="183"
+                        Margin="10,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Content=""
@@ -234,6 +235,15 @@
                         Margin="0,38,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top" />
+                    <Label
+                        x:Name="dError"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Width="169"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content=""
+                        Foreground="White" />
                 </Grid>
             </ContentControl>
 
